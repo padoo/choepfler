@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/starter.css">
+  <title>Chöpfler</title>
+</head>
+<body>
+<div class="container">
+  <header class="pb-3 mb-5 border-bottom">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
+        <div class="d-flex">
+          <a style="text-decoration: none" ; href="index.html" class="hiddenlink"><h3 id="appname">Chöpfler</h3>
+          </a>
+        </div>
+      </div>
+      <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
+        <form class='navbar-form'>
+          <div class='input-group'>
+            <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <a id="searchButton" class="btn btn-outline-success" role="button">Search</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <h1 id="badname"></h1>
+  <br>
+  <br>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Becken</th>
+        <th scope="col">Grad</th>
+      </tr>
+      </thead>
+      <tbody id="beckenListe">
+      </tbody>
+    </table>
+    <br>
+
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d680.9949998000151!2d7.4438655895828!3d46.94243220301158!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xab4c77b6b7abd77e!2sFreibad%20Marzili!5e0!3m2!1sde!2sch!4v1628851689343!5m2!1sde!2sch"
+      width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+    <a href="impressum.html">Impressum</a>
+
+
+  </div>
+
+  <script src="js/lib/jquery.slim.min.js"></script>
+  <script type="module" src="js/details.js"></script>
+  <script type="module" src="js/starter.js"></script>
+</div>
+</body>
+</html>

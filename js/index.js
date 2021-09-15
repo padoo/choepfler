@@ -1,0 +1,1 @@
+setupSearchListeners("myInput", "myButton");
