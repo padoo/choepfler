@@ -64,5 +64,5 @@ document.getElementById("searchInput")
 
 document.getElementById("searchButton").onclick = function (event) {
   var value = document.getElementById("searchInput").value;
-  window.location.href = "/search?q=" + value;
+  window.location.href = "search?q=" + value;
 }
