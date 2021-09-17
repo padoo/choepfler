@@ -2,7 +2,10 @@ let json;
 let badname = '';
 let badOrt = '';
 
-fetch('https://www.wiewarm.ch:443/api/v1/bad.json/34')
+let baseUrl = (window.location).search;
+let id = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
+
+fetch('https://www.wiewarm.ch:443/api/v1/bad.json/'+id)
   .then(res => res.json())
   .then(data => json = data)
   .then(appendBeckenlisteToHtmlTable)

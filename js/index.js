@@ -1,1 +1,1 @@
-setupSearchListeners("myInput", "myButton");
+setupSearchListeners("searchInput", "searchButton");
