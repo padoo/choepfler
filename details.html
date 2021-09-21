@@ -32,26 +32,39 @@
   <br>
 
   <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table">
       <thead>
       <tr>
         <th scope="col">Becken</th>
         <th scope="col">Grad</th>
+        <th scope="col">Datum</th>
       </tr>
       </thead>
       <tbody id="beckenListe">
       </tbody>
     </table>
-    <br>
-
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d680.9949998000151!2d7.4438655895828!3d46.94243220301158!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xab4c77b6b7abd77e!2sFreibad%20Marzili!5e0!3m2!1sde!2sch!4v1628851689343!5m2!1sde!2sch"
-      width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-    <a href="impressum.html">Impressum</a>
-
-
   </div>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
+        <h6>Preise:</h6>
+        <p id="badpreise"></p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 py-0.5">
+      </div>
+      <div class="col-xs-9 col-sm-9 col-md-4 col-lg-4 py-1.5">
+        <h6>Ort:</h6>
+        <p id="badAdresse"></p>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <a href="impressum.html">Impressum</a>
 
   <script src="js/lib/jquery.slim.min.js"></script>
   <script type="module" src="js/details.js"></script>
