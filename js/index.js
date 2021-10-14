@@ -7,8 +7,10 @@ function getPosition(options) {
 }
 
 async function getCurrentCity() {
+  let city = 'Bern';
+
   if (!navigator.geolocation) {
-    return 'Bern';
+    return city;
   }
   // Bern
   let coords = {
@@ -21,13 +23,19 @@ async function getCurrentCity() {
     coords = pos.coords;
   } catch (e) {
     console.log(`Error ${e.code}: ${e.message}`);
-    // return 'Bern';
+    // return city;
   }
 
   const response = await fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + coords.latitude + "&longitude=" + coords.longitude + "&localityLanguage=de");
   const data = await response.json();
 
-  return data.city;
+  if (data.city) {
+    city = data.city;
+  } else if (data.locality) {
+    city = data.locality;
+  }
+
+  return city;
 }
 
 const city = await getCurrentCity();
