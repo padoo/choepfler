@@ -21,39 +21,6 @@ import "./lib/bootstrap.bundle.min.js";
 // import "bootstrap/js/dist/util.js";
 // import "bootstrap/js/dist/modal.js";
 
-function geoFindMe(){
-
-  if (!navigator.geolocation){
-    return;
-  }
-
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "&localityLanguage=en")
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-      });
-  };
-
-  function error() {
-    var latitude  = 46.94809;
-    var longitude = 7.44744;
-    fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "&localityLanguage=en")
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-      });
-  };
-
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-geoFindMe();
-
-
 document.getElementById("searchInput")
   .addEventListener("keydown", function(event) {
     if (event.keyCode === 13) {
@@ -63,6 +30,6 @@ document.getElementById("searchInput")
   });
 
 document.getElementById("searchButton").onclick = function (event) {
-  var value = document.getElementById("searchInput").value;
+  var value = document.getElementById("searchInput").value.trim();
   window.location.href = "search?q=" + value;
 }
