@@ -32,6 +32,11 @@ async function getBadiPicture(badId) {
 
 function update_list(suchergebnisse) {
   $('#badiliste').empty();
+  if (suchergebnisse.length === 0) {
+    $('#badiliste').append(`<p>Keine Badi gefunden.</p>`);
+    return;
+  }
+
   suchergebnisse.forEach(function (suchergebnis) {
     $('#badiliste').append(`
 <a href="details?id=${suchergebnis.id}" class="hiddenlink">
