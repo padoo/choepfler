@@ -30,15 +30,15 @@ async function getBadiPicture(badId) {
   return bildUrl;
 }
 
-function update_list(suchergebnisse) {
-  $('#badiliste').empty();
+function update_list(suchergebnisse, jqueryId = '#badiliste') {
+  $(jqueryId).empty();
   if (suchergebnisse.length === 0) {
-    $('#badiliste').append(`<p>Keine Badi gefunden.</p>`);
+    $(jqueryId).append(`<p>Keine Badi gefunden.</p>`);
     return;
   }
 
   suchergebnisse.forEach(function (suchergebnis) {
-    $('#badiliste').append(`
+    $(jqueryId).append(`
 <a href="details?id=${suchergebnis.id}" class="hiddenlink">
   <div class="card mb-3">
     <div class="card-body">
@@ -66,4 +66,4 @@ function update_list(suchergebnisse) {
   });
 }
 
-export {getSearchResult, badiOverviewInformation, update_list};
+export {getSearchResult, badiOverviewInformation, getBadiPicture, update_list};

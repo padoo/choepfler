@@ -1,4 +1,5 @@
 import {badiOverviewInformation, getSearchResult, update_list} from "./search.util.js";
+import {getFavoriteBadis} from "./util.js";
 
 function getPosition(options) {
   return new Promise((resolve, reject) =>
@@ -37,6 +38,9 @@ async function getCurrentCity() {
 
   return city;
 }
+
+const favoriteBadis = getFavoriteBadis();
+update_list(favoriteBadis, '#favoritenListe');
 
 const city = await getCurrentCity();
 const searchResult = await getSearchResult(city);
