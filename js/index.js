@@ -40,7 +40,10 @@ async function getCurrentCity() {
 }
 
 const favoriteBadis = getFavoriteBadis();
-update_list(favoriteBadis, '#favoritenListe');
+if (favoriteBadis.length > 0) {
+  update_list(favoriteBadis, '#favoritenListe');
+  $('#favoritenInfo').remove();
+}
 
 const city = await getCurrentCity();
 const searchResult = await getSearchResult(city);
