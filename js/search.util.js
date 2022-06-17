@@ -7,6 +7,38 @@ async function getSearchResult(searchString) {
   }
 }
 
+async function getAllBecken() {
+  try {
+    const response = await fetch('https://www.wiewarm.ch:443/api/v1/temperature/all_current.json/0');
+    return await response.json();
+  } catch (e) {
+    return Promise.resolve([]);
+  }
+}
+
+async function badiOverviewInformationForKanton(kanton) {
+  const becken = await getAllBecken();
+  const beckenImKanton = becken.filter(b => b.kanton.toUpperCase() === kanton.toUpperCase());
+  const einBeckenProBadi = [];
+
+  beckenImKanton.forEach(b1 => {
+    if (!einBeckenProBadi.find(b2 => b1.badid === b2.badid)) {
+      einBeckenProBadi.push(b1);
+    }
+  });
+
+  einBeckenProBadi.sort((a, b) => a.ort === b.ort ? 0 : a.ort < b.ort ? -1 : 1);
+
+  return await Promise.all(einBeckenProBadi.map(async function (becken) {
+    const badiInfo = {};
+    badiInfo.name = becken['bad'];
+    badiInfo.ort = becken['ort'];
+    badiInfo.id = becken['badid'];
+    badiInfo.bildUrl = await getBadiPicture(badiInfo.id);
+    return badiInfo;
+  }));
+}
+
 async function badiOverviewInformation(data) {
   return await Promise.all(data.map(async function (badi) {
       const badiInfo = {};
@@ -66,4 +98,4 @@ function update_list(suchergebnisse, jqueryId = '#badiliste') {
   });
 }
 
-export {getSearchResult, badiOverviewInformation, getBadiPicture, update_list};
+export {getSearchResult, badiOverviewInformation, badiOverviewInformationForKanton, getBadiPicture, update_list};

@@ -1,4 +1,9 @@
-import {badiOverviewInformation, getSearchResult, update_list} from "./search.util.js";
+import {
+  badiOverviewInformation,
+  badiOverviewInformationForKanton,
+  getSearchResult,
+  update_list
+} from "./search.util.js";
 import {getFavoriteBadis} from "./util.js";
 
 function getPosition(options) {
@@ -7,11 +12,16 @@ function getPosition(options) {
   );
 }
 
-async function getCurrentCity() {
-  let city = 'Bern';
+async function getCurrentLocationInfo(city, kanton) {
+  if (city && kanton) {
+    return {city, kanton};
+  }
+
+  city = 'Bern';
+  kanton = 'BE';
 
   if (!navigator.geolocation) {
-    return city;
+    return {city, kanton};
   }
   // Bern
   let coords = {
@@ -36,8 +46,10 @@ async function getCurrentCity() {
     city = data.locality;
   }
 
-  return city;
+  kanton = data.principalSubdivisionCode.substring(3);
+  return {city, kanton};
 }
+
 
 const favoriteBadis = getFavoriteBadis();
 if (favoriteBadis.length > 0) {
@@ -45,7 +57,22 @@ if (favoriteBadis.length > 0) {
   $('#favoritenInfo').remove();
 }
 
-const city = await getCurrentCity();
-const searchResult = await getSearchResult(city);
-const badiInfos = await badiOverviewInformation(searchResult);
-update_list(badiInfos);
+//add custom location info with url: index.html?city=Spiez&kanton=BE
+const params = new URLSearchParams((window.location).search);
+const city = params.get('city') ? params.get('city') : undefined;
+const kanton = params.get('kanton') ? params.get('kanton') : undefined;
+
+
+const locationInfo = await getCurrentLocationInfo(city, kanton);
+const searchResultCity = await getSearchResult(locationInfo.city);
+let badiInfosCity = await badiOverviewInformation(searchResultCity);
+const badiInfosKanton = await badiOverviewInformationForKanton(locationInfo.kanton);
+
+badiInfosCity.forEach(b1 => {
+  const foundIndex = badiInfosKanton.findIndex(b2 => b1.id === b2.id);
+  if (foundIndex) {
+    badiInfosKanton.splice(foundIndex, 1);
+  }
+});
+
+update_list(badiInfosCity.concat(badiInfosKanton));
