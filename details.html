@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/starter.css">
+  <link rel="icon" href="assets/choepfeler_logo.svg" type="image/x-icon"/>
   <title>Chöpfler</title>
 </head>
 <body>
@@ -15,13 +16,8 @@
           <a href="index.html"><img alt="Chöpfler Logo mit Link" src="assets/logo.svg" height="50"></a>
         </div>
       </div>
-      <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
-        <form class='navbar-form'>
-          <div class='input-group'>
-            <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Suche" aria-label="Search">
-            <a id="searchButton" class="btn btn-outline-success" role="button"><i class="bi bi-search"></i></a>
-          </div>
-        </form>
+      <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2 text-right">
+        <a href="search.html" id="searchButton" class="btn btn-outline-success" role="button"><i >Alle Badis</i></a>
       </div>
     </div>
   </header>
@@ -45,6 +41,7 @@
         <th scope="col">Becken</th>
         <th scope="col">Grad</th>
         <th scope="col">Datum</th>
+        <th scope="col">Wetter</th>
       </tr>
       </thead>
       <tbody id="beckenListe">
@@ -71,11 +68,42 @@
   <br>
   <br>
 
-  <a href="impressum.html">Impressum</a>
+  <div id="weather-data" style="text-align: center">
+    <h2 class="my-md-5">Wetter</h2>
+    <div id="weather-today">
+      <p style="font-weight: bold">Heute</p>
+      <div id="weather-icon"></div>
+      <p id="weather-temperature"></p>
+      <p id="weather-comment"></p>
+      <p id="weather-thunderWarning"></p>
+    </div>
+    <div style="flex-direction: row; justify-content: center; margin: 0 auto" id="nextDays" visibility="hidden"
+         class="weather-days">
+    </div>
+    <button id="toggleNextDay" class="btn btn-outline-success"><span class="ui-button-text">Wochenvorschau</span>
+    </button>
+    <p id="error-text"><span class="ui-error-text"></span></p>
+  </div>
 
-  <script src="js/lib/jquery.slim.min.js"></script>
-  <script type="module" src="js/starter.js"></script>
-  <script type="module" src="js/details.js"></script>
+  <div class="maps-div">
+    <iframe width="100%" height="100%" id="map"
+    ></iframe>
+  </div>
+
 </div>
+
+<footer>
+  <div class="footer-center">
+    <h4>Chöpfler Webapp</h4>
+    <p>Hier kommst du an alle Informationen über die verschiedensten Badeplätze in der Schweiz und auch an die
+      Empfehlungen!</p>
+    <a href="impressum.html" class="link-impressum">Impressum</a>
+  </div>
+</footer>
+
+<script src="js/lib/jquery.slim.min.js"></script>
+<script type="module" src="js/starter.js"></script>
+<script type="module" src="js/details.js"></script>
+
 </body>
 </html>

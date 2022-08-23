@@ -21,5 +21,44 @@ function isFavorite(badiInfo) {
   return favoriteBadis.some(b => b.id === badiInfo.id)
 }
 
+function addToLocalStorage(storageName, key, value) {
+  const storage = JSON.parse(localStorage.getItem(storageName)) || {};
+  storage[key] = value;
+  localStorage.setItem(storageName, JSON.stringify(storage));
+}
 
-export {addFavoriteBadi, deleteFavoriteBadi, getFavoriteBadis, isFavorite};
+function getFromLocalStorage(storageName, key) {
+  return JSON.parse(localStorage.getItem(storageName))[key];
+}
+
+function resetLocalStorage(storageName) {
+  localStorage.setItem(storageName, JSON.stringify({}));
+}
+
+function addFeatureToggle(key) {
+  addToLocalStorage('featureToggles', key, true);
+}
+
+function getFeatureToggle(key) {
+  return getFromLocalStorage('featureToggles', key);
+}
+
+function getFeatureToggles() {
+  return JSON.parse(localStorage.getItem('featureToggles')) || {};
+}
+
+function resetFeatureToggles() {
+  resetLocalStorage('featureToggles');
+}
+
+
+export {
+  addFavoriteBadi,
+  deleteFavoriteBadi,
+  getFavoriteBadis,
+  isFavorite,
+  addFeatureToggle,
+  getFeatureToggle,
+  getFeatureToggles,
+  resetFeatureToggles
+};

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/starter.css">
+  <link rel="icon" href="assets/choepfeler_logo.svg" type="image/x-icon" />
   <title>Chöpfler</title>
 </head>
 <body>
@@ -15,30 +16,40 @@
             <a href="index.html"><img alt="Chöpfler Logo mit Link" src="assets/logo.svg" height="50"></a>
           </div>
         </div>
-        <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
-          <form class='navbar-form'>
-            <div class='input-group'>
-              <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Suche" aria-label="Search">
-              <a id="searchButton" class="btn btn-outline-success" role="button"><i class="bi bi-search"></i></a>
-            </div>
-          </form>
-        </div>
+          <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2 text-right">
+            <a href="search.html" id="searchButton" class="btn btn-outline-success" role="button"><i >Alle Badis</i></a>
+          </div>
       </div>
     </header>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-xl">
-        <H3>Kontakt</H3>
-        <abbr>E-Mail</abbr> <a href="mailto:info@example.com">info@example.com</a>
-      </div>
-      <div class="col-xl">
+      <div class="col-xl" align="center" style="margin: 0 auto;">
+        <h3>Über uns!</h3>
+        <p>Wir sind eine Gruppe von Informatik Lernenden, die in ihrer Startphase am Projekt "Chöpfler" arbeiten dürfen.</p>
+        <p class= "pb-2 mb-1 border-bottom"></p>
+        <h3>Konzept</h3>
+        <p>Die erste Gruppe hat das Projket ins Leben gerufen und die jährlich folgenden Gruppen arbeiten an dem Projekt weiter.</p>
+        <p class= "pb-2 mb-1 border-bottom"></p>
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:info@example.com">info@example.com</a></p>
+        <p class= "pb-2 mb-1 border-bottom"></p>
         <h3>Quellen</h3>
-        <p><a href="http://www.wiewarm.ch">http://www.wiewarm.ch</a> sowie teilnehmende Badeanstalten und Individuen</p>
+        <p style="margin: 0 auto">Teilnehmende Badeanstalten und Individuen: <a href="http://www.wiewarm.ch" target="_blank">http://www.wiewarm.ch</a></p>
+        <p>API Wetter: <a href="https://weatherdbi.herokuapp.com" target="_blank">https://weatherdbi.herokuapp.com</a></p>
       </div>
     </div>
   </div>
+
+  <footer class = full_footer>
+    <div class = "footer-center">
+      <h4>Chöpfler Webapp</h4>
+      <p>Hier kommst du an alle Informationen über die verschiedensten Badeplätze in der Schweiz und auch an die Empfehlungen!</p>
+      <a href="impressum.html" class = "link-impressum">Impressum</a>
+    </div>
+  </footer>
+
   <script src="js/lib/jquery.slim.min.js"></script>
   <script type="module" src="js/starter.js"></script>
 </body>

@@ -63,6 +63,8 @@ const city = params.get('city') ? params.get('city') : undefined;
 const kanton = params.get('kanton') ? params.get('kanton') : undefined;
 
 
+
+
 const locationInfo = await getCurrentLocationInfo(city, kanton);
 const searchResultCity = await getSearchResult(locationInfo.city);
 let badiInfosCity = await badiOverviewInformation(searchResultCity);
@@ -76,3 +78,5 @@ badiInfosCity.forEach(b1 => {
 });
 
 update_list(badiInfosCity.concat(badiInfosKanton));
+
+

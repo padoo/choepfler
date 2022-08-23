@@ -20,16 +20,3 @@ import "./lib/bootstrap.bundle.min.js";
 
 // import "bootstrap/js/dist/util.js";
 // import "bootstrap/js/dist/modal.js";
-
-document.getElementById("searchInput")
-  .addEventListener("keydown", function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("searchButton").click();
-    }
-  });
-
-document.getElementById("searchButton").onclick = function (event) {
-  var value = document.getElementById("searchInput").value.trim();
-  window.location.href = "search?q=" + value;
-}
