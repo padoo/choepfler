@@ -58,19 +58,8 @@ export function filterBadiByTemp(badiTemp, data) {
 }
 
 export async function filterBadiByGratis(isBadiGratis, data) {
+  // TODO badi gratis Id updaten (CTRL-160)
   let badiGratisId = [49, 126, 17, 44, 156, 190, 43, 187, 124, 210, 34, 40, 65, 67, 47, 68, 48, 61, 128, 11, 50, 125, 200, 51, 199, 206, 120, 178, 15, 227];
-  let badiPreis = "";
-  // const allBadis = await getAllBadis();
-  // for (let i =  0; i <= allBadis.length - 1; i++) {  // because the last one ist undefined
-  //   if (allBadis && allBadis[i].id) {
-  //     badiPreis = await getBadiById(allBadis[i].id);
-  //     if (badiPreis){
-  //       if (badiPreis.preise && (badiPreis.preise.includes("gratis") || badiPreis.preise.includes("Gratis"))) {
-  //         badiGratisId.push(allBadis[i].id);
-  //       }
-  //     }
-  //   }
-  // }
   return data.filter(b => badiGratisId.includes(b.id));
 }
 

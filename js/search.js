@@ -11,6 +11,7 @@ let data = await getAllBadis();
 data = await filterBadiOverviewInformation(data);
 
 let filterGratisBadi = false;
+// TODO refactor data and allData
 const allData = data;
 updateList(data);
 
