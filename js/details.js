@@ -85,10 +85,16 @@ $('#favorit').click(function (event) {
 async function getWeather(ort1) {
   let ort = ort1.toLowerCase()
   console.log(ort.includes("ö"))
-  switch (ort){
-    case ort.includes("ö"): ort.replace("ö", "oe"); return ort
-    case ort.includes("ä"): ort.replace("ä", "ae"); return ort
-    case ort.includes("ü"): ort.replace("ü", "ue"); return ort
+  switch (ort) {
+    case ort.includes("ö"):
+      ort.replace("ö", "oe");
+      return ort
+    case ort.includes("ä"):
+      ort.replace("ä", "ae");
+      return ort
+    case ort.includes("ü"):
+      ort.replace("ü", "ue");
+      return ort
   }
   console.log(ort = ort.replace("ö", "oe"))
   try {
@@ -114,31 +120,49 @@ if (weatherData.length === 0) {
 function appendDataToElements(weatherData) {
   const translateDays = (replaceValue) => {
     let day = ""
-    switch (replaceValue.toLowerCase()){
-      case "monday": return day = "Montag"
-      case "tuesday": return day = "Dienstag"
-      case "wednesday": return day = "Mittwoch"
-      case "thursday": return day = "Donnerstag"
-      case "friday": return day = "Freitag"
-      case "saturday": return day = "Samstag"
-      case "sunday": return day = "Sonntag"
+    switch (replaceValue.toLowerCase()) {
+      case "monday":
+        return day = "Montag"
+      case "tuesday":
+        return day = "Dienstag"
+      case "wednesday":
+        return day = "Mittwoch"
+      case "thursday":
+        return day = "Donnerstag"
+      case "friday":
+        return day = "Freitag"
+      case "saturday":
+        return day = "Samstag"
+      case "sunday":
+        return day = "Sonntag"
     }
   }
 
   const translateComments = (replacementComment) => {
     let comment = ""
-    switch (replacementComment.toLowerCase()){
-      case "sunny": return comment = "Sonnig"
-      case "scattered": return comment = "Vereinzelte Gewitter"
-      case "thunderstorm": return comment = "Gewitter"
-      case "showers": return comment = "Regenschauer"
-      case "rain": return comment = "Regen"
-      case "partly cloudy": return comment = "Teilweise Bewölkt"
-      case "mostly sunny": return comment = "Meistens Sonnig"
-      case "mostly cloudy": return comment = "Meistens Bewölkt"
-      case "cloudy": return comment = "Bewölkt"
-      case "scattered thunderstorms": return comment = "Teilweise Gewitter"
-      default: return replacementComment;
+    switch (replacementComment.toLowerCase()) {
+      case "sunny":
+        return comment = "Sonnig"
+      case "scattered":
+        return comment = "Vereinzelte Gewitter"
+      case "thunderstorm":
+        return comment = "Gewitter"
+      case "showers":
+        return comment = "Regenschauer"
+      case "rain":
+        return comment = "Regen"
+      case "partly cloudy":
+        return comment = "Teilweise Bewölkt"
+      case "mostly sunny":
+        return comment = "Meistens Sonnig"
+      case "mostly cloudy":
+        return comment = "Meistens Bewölkt"
+      case "cloudy":
+        return comment = "Bewölkt"
+      case "scattered thunderstorms":
+        return comment = "Teilweise Gewitter"
+      default:
+        return replacementComment;
     }
   }
   let weatherTemperatur = weatherData.currentConditions.temp.c + " °C";
@@ -202,3 +226,54 @@ function loadMap(data) {
 }
 
 loadMap(data);
+
+function readTime(badiTime) {
+  let badiTimes = badiTime.zeiten.replaceAll(/(\n)+/g, '<br />');
+  $("#times").html(badiTimes)
+}
+
+readTime(data)
+
+export async function getAllImages(id) {
+  try {
+    const response = await fetch('https://www.wiewarm.ch:443/api/v1/image.json/' + id);
+    const imagedata = await response.json();
+
+    for (let i = 0; i < imagedata.length; i++) {
+      if (imagedata[i]){
+        const div = document.createElement("div")
+        const img = document.createElement("img")
+        const arrowLeft = document.getElementById("arrowLeft")
+        const arrowRight = document.getElementById("arrowRight")
+        const divSlidePics = document.getElementById("slidePics")
+        divSlidePics.hidden = false
+        if (imagedata.length > 1) {
+          arrowLeft.hidden = false
+          arrowRight.hidden = false
+        }
+        if (i === 0) {
+          div.setAttribute("class", "carousel-item active")
+        } else {
+          div.setAttribute("class", "carousel-item")
+        }
+        img.setAttribute("class", "d-block w-100")
+        img.setAttribute("src", "https://www.wiewarm.ch/" + imagedata[i].image)
+        div.appendChild(img)
+        const pics = document.getElementById("slidePics")
+        pics.appendChild(div)
+      }
+
+    }
+
+    return imagedata;
+
+
+  } catch (e) {
+    return Promise.resolve([]);
+  }
+}
+
+getAllImages(id)
+
+
+
