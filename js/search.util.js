@@ -57,6 +57,10 @@ export function filterBadiByTemp(badiTemp, data) {
   return data.filter(b => Math.round(parseFloat(b.temperatur)) >= parseFloat(badiTemp + ".0"));
 }
 
+export function reverseBadiList(data) {
+  return data.reverse();
+}
+
 export async function filterBadiByGratis(isBadiGratis, data) {
   // TODO badi gratis Id updaten (CTRL-160)
   let badiGratisId = [49, 126, 17, 44, 156, 190, 43, 187, 124, 210, 34, 40, 65, 67, 47, 68, 48, 61, 128, 11, 50, 125, 200, 51, 199, 206, 120, 178, 15, 227];
@@ -134,7 +138,7 @@ function update_list(suchergebnisse, jqueryId = '#badiliste') {
   }
 
   suchergebnisse.forEach(suchergebnis => {
-    $(jqueryId).append(`
+    suchergebnis.name && $(jqueryId).append(`
 <a href="details?id=${suchergebnis.id}" class="hiddenlink">
   <div class="card mb-3">
     <div class="card-body">
@@ -144,6 +148,7 @@ function update_list(suchergebnisse, jqueryId = '#badiliste') {
               <img src="${suchergebnis.bildUrl}" class="img-fluid schwimmbad-bild">
             </div>
           </div>
+
           <div class="align-middle col-sm-12 col-md-6 col-lg-6 py-2">
               <div class="schwimmbad-text">
                   <div class="text-center">
@@ -167,5 +172,5 @@ export {
   badiOverviewInformationForKanton,
   getBadiPicture,
   update_list,
-  getAllBadis
+  getAllBadis,
 };

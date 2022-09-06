@@ -61,26 +61,36 @@
         </div>
       </div>
 
-      <div class="tempSearchAndSearchButton d-flex">
-        <div class="d-flex">
-          <input  class="tempInput form-control" min="5" max="10" id="tempInput" type="number"/>
-          <p class="Celsius">°C</p>
-          <Input id="tempRange" class="range" type="range" name="" min="0" max="50" value="0"/>
-
-
+      <div class="tempSearchAndSearchButton form-row">
+        <div class="form-group">
+          <label for="temperatureFilter">min. Wassertemperatur</label>
+          <div id="temperatureFilter" class="temperatureFilter d-flex">
+            <input class="tempInput form-control" id="tempInput" type="number"/>
+            <p class="Celsius">°C</p>
+            <Input id="tempRange" class="range" type="range" name="" min="0" max="50" value="0"/>
+            <button hidden id="resetTemperature" type='button'
+                    class="resetTemperature btn btn-outline-success bi bi-arrow-counterclockwise">
+            </button>
+          </div>
         </div>
+
         <div class="gratisFilter d-flex">
-          <p class="textGratis">Gratis Angebot:</p>
+          <button id="reverseButton" type='button'
+                  class="reverseButton btn btn-outline-success bi bi-arrow-down-up"></button>
+          <p id="textGratis" class="textGratis">Gratis Angebot:</p>
           <input class="checkboxGratis" type="checkbox" id="checkboxGratis" placeholder="Suche"/>
         </div>
-
       </div>
-
 
 
     </form>
   </div>
-  <h2>Resultate</h2>
+
+  <div class="result d-flex">
+    <h2>Resultate</h2>
+    <p class="resultLengthBadis" id="resultLengthBadis"></p>
+  </div>
+  <img id="spinner" width="100px" height="100px" class="spinner" src="assets/choepfeler_logo.svg"/>
 
   <p id="badiname"></p>
   <p id="location"></p>
@@ -89,15 +99,21 @@
 
   <div id="badiliste">
   </div>
-
 </div>
 
-<footer class = full_footer>
-  <div class = "footer-center">
-    <h4>Chöpfler Webapp</h4>
-    <p>Hier kommst du an alle Informationen über die verschiedensten Badeplätze in der Schweiz und auch an die Empfehlungen!</p>
-    <a href="impressum.html" class = "link-impressum">Impressum</a>
+<footer class=full_footer>
+  <img class="island" src="assets/island2.png" alt="picture of island"/>
+  <div class="choepfler-webapp">
+    <img class="logo" src="assets/choepfeler_logo.svg" alt="choepfler logo"/>
+    <h4>Chöpfler Webapp ©</h4>
   </div>
+  <div class="links-div">
+    <div class="links">
+      <p><a href="impressum.html" class="link-impressum">Impressum</a></p>
+      <p><a href="./" class="link-impressum"><span>&#8593; &nbsp;</span></a></p>
+    </div>
+  </div>
+
 </footer>
 
 <script src="js/lib/jquery.slim.min.js"></script>

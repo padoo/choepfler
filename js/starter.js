@@ -41,16 +41,3 @@ if (activeToggles.length > 0) {
   console.log('Active Feature Toggles: ' + activeToggles.join(', '));
 }
 
-document.getElementById("searchInput")
-  .addEventListener("keydown", function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("searchButton").click();
-    }
-  });
-
-document.getElementById("searchButton").onclick = function (event) {
-  var valueSearchInput = document.getElementById("searchInput").value.trim();
-  let valueKantonDropdown = document.getElementById("inputKanton").value.trim();
-  window.location.href = "search?q=" + valueSearchInput + "&kanton=" + valueKantonDropdown;
-}

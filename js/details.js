@@ -7,6 +7,7 @@ function appendBeckenlisteToHtmlTable(data) {
   let badPreis = data['preise'].replaceAll(/(\n)+/g, '<br />');
   let badAdresse = data['adresse2'];
   let badPLZ = data['plz'];
+  let badZeit = data['zeiten'];
 
   $("#badname").html(badname + ' ' + badOrt);
 
@@ -18,6 +19,14 @@ function appendBeckenlisteToHtmlTable(data) {
   }
 
   $("#badpreise").html(preis);
+
+  let zeiten = '';
+  if (badZeit.length > 0) {
+    zeiten += badZeit;
+  } else
+    zeiten = 'Keine Angaben vorhanden.'
+
+  $("#badzeiten").html(zeiten);
 
   let adresse = `<p>${badname} <br>`;
   if (badAdresse.length > 0) {
@@ -54,6 +63,67 @@ const id = parseInt(baseUrl.substring(baseUrl.lastIndexOf('=') + 1));
 
 const response = await fetch('https://www.wiewarm.ch:443/api/v1/bad.json/' + id);
 const data = await response.json();
+
+function countdownOpening(data) {
+  let openingText = data.zeiten
+  let regex = /(\d{1,2}(?:\.|\:)\d{1,2}) ?- ?(\d{1,2}(?:\.|\:)\d{1,2})/.exec(openingText)
+
+  if (regex === null) {
+    return;
+  }
+
+  const formattedRegexOpen = regex[1].replace(".", ":");
+  const formattedSecondRegexClose = regex[2].replace(".", ":");
+  const todayDate = new Date()
+
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+  let currentDay = todayDate.getDate()
+
+
+  let x = setInterval(function () {
+    let textOpening = "";
+    document.getElementById("counter").style.color = "red";
+
+    const countDownDateOpening = new Date(monthNames[todayDate.getMonth()] + " " + currentDay + ", " + todayDate.getFullYear() + " " + formattedRegexOpen + ":00").getTime();
+    const countDownDateClosing = new Date(monthNames[todayDate.getMonth()] + " " + currentDay + ", " + todayDate.getFullYear() + " " + formattedSecondRegexClose + ":00").getTime();
+
+    const now = new Date().getTime();
+
+    const distanceToOpen = countDownDateOpening - now;
+    const distanceToClose = countDownDateClosing - now;
+
+    const calculate = (calculateDifference) => {
+      const hours = Math.floor((calculateDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((calculateDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((calculateDifference % (1000 * 60)) / 1000);
+      document.getElementById("counter").innerHTML = `${textOpening} ${hours}h ${minutes}m ${seconds}s (Angaben ohne Gewähr)`;
+    }
+    if (distanceToOpen < 0 && distanceToClose < 0) {
+      currentDay += 1;
+      textOpening = "Öffnet in: ";
+      calculate(distanceToOpen)
+    }
+    if (distanceToClose < 0) {
+      calculate(distanceToOpen)
+    } else {
+      textOpening = "Schliesst in: ";
+      document.getElementById("counter").style.color = "green";
+      calculate(distanceToClose)
+    }
+
+    if (distanceToOpen < 0) {
+      calculate(distanceToClose)
+    } else {
+      textOpening = "Öffnet in: ";
+      document.getElementById("counter").style.color = "red";
+      calculate(distanceToOpen)
+    }
+  }, 0);
+}
+
+countdownOpening(data)
 appendBeckenlisteToHtmlTable(data);
 
 const badiInfo = {
@@ -110,7 +180,7 @@ async function getWeather(ort1) {
 const weatherData = await getWeather(data.ort)
 
 if (weatherData.length === 0) {
-  $("#error-text span").text("No Data Found");
+  $("#error-text span").text("Keine Daten gefunden");
   $("#toggleNextDay").toggle()
 } else {
   appendDataToElements(weatherData)
@@ -215,6 +285,13 @@ function appendDataToElements(weatherData) {
   }
 }
 
+function readTime(badiTime) {
+  let badiTimes = badiTime.zeiten.replaceAll(/(\n)+/g, '<br />');
+  $("#times").html(badiTimes);
+}
+
+readTime(data)
+
 function loadMap(data) {
   let badPLZ = data['plz'];
   let badOrt = data['ort'];
@@ -227,20 +304,14 @@ function loadMap(data) {
 
 loadMap(data);
 
-function readTime(badiTime) {
-  let badiTimes = badiTime.zeiten.replaceAll(/(\n)+/g, '<br />');
-  $("#times").html(badiTimes)
-}
-
-readTime(data)
-
 export async function getAllImages(id) {
   try {
     const response = await fetch('https://www.wiewarm.ch:443/api/v1/image.json/' + id);
     const imagedata = await response.json();
+    $("#spinner").toggle()
 
     for (let i = 0; i < imagedata.length; i++) {
-      if (imagedata[i]){
+      if (imagedata[i]) {
         const div = document.createElement("div")
         const img = document.createElement("img")
         const arrowLeft = document.getElementById("arrowLeft")
@@ -273,7 +344,21 @@ export async function getAllImages(id) {
   }
 }
 
-getAllImages(id)
+let isButtonClick = false;
+const mapsButton = document.getElementById("maps-button");
+const mapsDiv = document.getElementById("maps-div");
 
+mapsButton.onclick = ( e => {
+  isButtonClick = !isButtonClick;
+  if (isButtonClick) {
+    mapsButton.textContent = "Google Maps schliessen"
+    mapsDiv.hidden = false
+  } else {
+    mapsButton.textContent = "Google Maps anzeigen"
+    mapsDiv.hidden = true
+  }
+})
+
+getAllImages(id)
 
 

@@ -2,7 +2,7 @@ import {
   badiOverviewInformation,
   badiOverviewInformationForKanton,
   getSearchResult,
-  update_list
+  update_list,
 } from "./search.util.js";
 import {getFavoriteBadis} from "./util.js";
 
@@ -63,12 +63,11 @@ const city = params.get('city') ? params.get('city') : undefined;
 const kanton = params.get('kanton') ? params.get('kanton') : undefined;
 
 
-
-
 const locationInfo = await getCurrentLocationInfo(city, kanton);
 const searchResultCity = await getSearchResult(locationInfo.city);
 let badiInfosCity = await badiOverviewInformation(searchResultCity);
 const badiInfosKanton = await badiOverviewInformationForKanton(locationInfo.kanton);
+$("#spinner").toggle()
 
 badiInfosCity.forEach(b1 => {
   const foundIndex = badiInfosKanton.findIndex(b2 => b1.id === b2.id);
@@ -78,5 +77,4 @@ badiInfosCity.forEach(b1 => {
 });
 
 update_list(badiInfosCity.concat(badiInfosKanton));
-
 

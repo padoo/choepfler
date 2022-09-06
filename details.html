@@ -7,7 +7,7 @@
   <link rel="icon" href="assets/choepfeler_logo.svg" type="image/x-icon"/>
   <title>Chöpfler</title>
 </head>
-<body>
+<body id="body">
 <div class="container">
   <header class="pb-3 mb-5 border-bottom">
     <div class="row">
@@ -17,11 +17,11 @@
         </div>
       </div>
       <div class="align-middle col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2 text-right">
-        <a href="search.html" id="searchButton" class="btn btn-outline-success" role="button"><i >Alle Badis</i></a>
+        <a href="search.html" id="searchButton" class="btn btn-outline-success" role="button"><i>Alle Badis</i></a>
       </div>
     </div>
   </header>
-
+  <img id="spinner" width="100px" height="100px" class="spinner" src="assets/choepfeler_logo.svg"/>
   <div class="row">
     <div class="col-10 col-sm-11">
       <h1 id="badname"></h1>
@@ -53,35 +53,26 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
-        <h6>Preise:</h6>
-        <p id="badpreise"></p>
-      </div>
-      <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 py-0.5">
+        <h6>Öffnungszeiten:</h6>
+        <p id="times"></p>
+        <p id="counter"></p>
       </div>
       <div class="col-xs-9 col-sm-9 col-md-4 col-lg-4 py-1.5">
         <h6>Ort:</h6>
         <p id="badAdresse"></p>
       </div>
-    </div>
-  </div>
-
-  <br>
-  <br>
-
-  <div class="img-carousel">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div hidden class="carousel-inner" id="slidePics">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
+        <h6>Preise:</h6>
+        <p id="badpreise"></p>
       </div>
-      <a hidden id="arrowLeft" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a hidden id="arrowRight" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+
     </div>
   </div>
+
+  <br>
+  <br>
+
+
 
   <div id="weather-data" style="text-align: center">
     <h2 class="my-5">Wetter</h2>
@@ -100,20 +91,51 @@
     <p id="error-text"><span class="ui-error-text"></span></p>
   </div>
 
-  <div class="maps-div">
+  <br>
+  <br>
+
+  <div class="img-carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div hidden class="carousel-inner" id="slidePics">
+      </div>
+      <a hidden id="arrowLeft" class="carousel-control-prev" href="#carouselExampleControls" role="button"
+         data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a hidden id="arrowRight" class="carousel-control-next" href="#carouselExampleControls" role="button"
+         data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 3em; margin-bottom: 1em">
+    <button id="maps-button" type='button'
+            class="btn btn-outline-success">Google Maps anzeigen
+    </button>
+  </div>
+
+  <div hidden id="maps-div" class="maps-div">
     <iframe width="100%" height="100%" id="map"
     ></iframe>
   </div>
 
 </div>
 
-<footer>
-  <div class="footer-center">
-    <h4>Chöpfler Webapp</h4>
-    <p>Hier kommst du an alle Informationen über die verschiedensten Badeplätze in der Schweiz und auch an die
-      Empfehlungen!</p>
-    <a href="impressum.html" class="link-impressum">Impressum</a>
+<footer class=full_footer>
+  <img class="island" src="assets/island2.png" alt="picture of island"/>
+  <div class="choepfler-webapp">
+    <img class="logo" src="assets/choepfeler_logo.svg" alt="choepfler logo"/>
+    <h4>Chöpfler Webapp ©</h4>
   </div>
+  <div class="links-div">
+    <div class="links">
+      <p><a href="impressum.html" class="link-impressum">Impressum</a></p>
+      <p><a href="./" class="link-impressum"><span>&#8593; &nbsp;</span></a></p>
+    </div>
+  </div>
+
 </footer>
 
 <script src="js/lib/jquery.slim.min.js"></script>
