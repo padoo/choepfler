@@ -8,7 +8,7 @@
   <title>Chöpfler</title>
 </head>
 <body id="body">
-<div class="container">
+<div id="container" class="container">
   <header class="pb-3 mb-5 border-bottom">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
@@ -21,7 +21,6 @@
       </div>
     </div>
   </header>
-  <img id="spinner" width="100px" height="100px" class="spinner" src="assets/choepfeler_logo.svg"/>
   <div class="row">
     <div class="col-10 col-sm-11">
       <h1 id="badname"></h1>
@@ -72,7 +71,22 @@
   <br>
   <br>
 
-
+  <div class="img-carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div hidden class="carousel-inner" id="slidePics">
+      </div>
+      <a hidden id="arrowLeft" class="carousel-control-prev" href="#carouselExampleControls" role="button"
+         data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a hidden id="arrowRight" class="carousel-control-next" href="#carouselExampleControls" role="button"
+         data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
 
   <div id="weather-data" style="text-align: center">
     <h2 class="my-5">Wetter</h2>
@@ -94,23 +108,7 @@
   <br>
   <br>
 
-  <div class="img-carousel">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div hidden class="carousel-inner" id="slidePics">
-      </div>
-      <a hidden id="arrowLeft" class="carousel-control-prev" href="#carouselExampleControls" role="button"
-         data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a hidden id="arrowRight" class="carousel-control-next" href="#carouselExampleControls" role="button"
-         data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-  <div style="text-align: center; margin-top: 3em; margin-bottom: 1em">
+  <div style="text-align: center; margin-top: 3em; margin-bottom: 4em">
     <button id="maps-button" type='button'
             class="btn btn-outline-success">Google Maps anzeigen
     </button>
@@ -121,8 +119,74 @@
     ></iframe>
   </div>
 
-</div>
+  <!---->
+  <!--Fahrplan Teil-->
+  <!---->
+  <div class="sbbFormAll">
+    <img alt="sbb logo" src="assets/Extension.svg" class="sbbLogo">
+    <form action="" id="sbbapp">
+      <div class="sbbTop">
+        <!--Von Bahnhof eingabe-->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="sbbTopLeftLabel">Von</label>
+            <input id="from" type="text" name="from" class="form-control"
+                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="sbbTopRightLable">Nach</label>
+            <input id="to" type="text" name="to" class="form-control"
+                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+          </div>
+        </div>
+      </div>
+      <div class="sbbMiddle">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="sbbMiddleLeftLable">Datum</label>
+            <input value="30.01.2022" id="date" type="text" name="date" class="form-control"
+                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="sbbMiddleRightLabel">Zeit</label>
+            <input value="13:05" id="time" type="text" name="time" class="form-control"
+                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+          </div>
+        </div>
+      </div>
+      <div class="sbbBottom">
+        <!--      Abfahrt ankunft Buttons-->
+        <div class="sbbButtonDiv1">
+          <div class="sbbButtonDiv2">
+            <button id="search&#45;&#45;sbb" type="button" onclick="callSBB()"
+                    class="searchConnectionBtn btn btn-outline-success">Verbindung
+              suchen
+            </button>
+          </div>
+        </div>
+        <div class="abfahrtAnkunft">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="false" name="isArrival" id="departure"
+                   checked="checked">
+            <label class="form-check-label" for="departure">Abfahrt</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input is_arrival" type="radio" value="true" name="isArrival" id="arrival">
+            <label class="form-check-label" for="arrival">Ankunft</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!---->
+  <!--Fahrplan Teil Ende-->
+  <!---->
 
+</div>
+<div class="spinnerLoading2" id="spinnerLoading">
+  <img id="spinner" width="80px" height="auto" class="spinner" src="assets/choepfeler_logo.svg"/>
+  <p class="loading"></p>
+</div>
 <footer class=full_footer>
   <img class="island" src="assets/island2.png" alt="picture of island"/>
   <div class="choepfler-webapp">
@@ -141,6 +205,40 @@
 <script src="js/lib/jquery.slim.min.js"></script>
 <script type="module" src="js/starter.js"></script>
 <script type="module" src="js/details.js"></script>
+
+<script>
+  window.onload = function () {
+    var month = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth();
+    var currentMonth = month[mm];
+    var yyyy = today.getFullYear();
+    var hh = String(today.getHours()).padStart(2, '0');
+    var min = String(today.getMinutes()).padStart(2, '0');
+    today = dd + '.' + currentMonth + '.' + yyyy;
+    time = hh + ':' + min;
+    document.getElementById('date').value = today;
+    document.getElementById('time').value = time;
+  }
+
+  function callSBB() {
+    let sbbfrom = document.getElementById('from').value;
+    let sbbto = document.getElementById('to').value;
+    let sbbdate = document.getElementById('date').value;
+    let sbbtime = document.getElementById('time').value;
+    let arrival = "";
+
+    if (document.getElementById('departure').checked) {
+      arrival = "false";
+    } else if (document.getElementById('arrival').checked) {
+      arrival = "true";
+    }
+    let url = `https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=${sbbfrom}&nach=${sbbto}&datum=${sbbdate}&zeit=${sbbtime}&an=${arrival}&suche=true`;
+    window.open(url, '_blank');
+  }
+</script>
+
 
 </body>
 </html>

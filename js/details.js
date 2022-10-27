@@ -1,6 +1,6 @@
 import {getBadiPicture} from "./search.util.js";
 import {addFavoriteBadi, deleteFavoriteBadi, isFavorite} from "./util.js";
-
+$("#container").toggle()
 function appendBeckenlisteToHtmlTable(data) {
   let badname = data['badname'];
   let badOrt = data['ort'];
@@ -304,11 +304,22 @@ function loadMap(data) {
 
 loadMap(data);
 
+// Sbb Fahrplan automatische Ausfuellung
+let sbbBadAdresse = data['adresse2'];
+let sbbBadOrt = data['ort']
+
+const inputTo = document.getElementById("to");
+
+let sbbinputto = sbbBadOrt + ", " + sbbBadAdresse
+inputTo.value = sbbinputto;
+// Sbb Fahrplan automatische Ausfuellung ende
+
 export async function getAllImages(id) {
   try {
     const response = await fetch('https://www.wiewarm.ch:443/api/v1/image.json/' + id);
     const imagedata = await response.json();
-    $("#spinner").toggle()
+    $("#container").toggle()
+    $("#spinnerLoading").toggle()
 
     for (let i = 0; i < imagedata.length; i++) {
       if (imagedata[i]) {
@@ -338,7 +349,6 @@ export async function getAllImages(id) {
 
     return imagedata;
 
-
   } catch (e) {
     return Promise.resolve([]);
   }
@@ -360,5 +370,3 @@ mapsButton.onclick = ( e => {
 })
 
 getAllImages(id)
-
-

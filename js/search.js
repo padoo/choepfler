@@ -8,10 +8,11 @@ import {
   filterBadiByOrt,
   filterBadiByGratis
 } from "./search.util.js";
-
+$("#container").toggle()
 let data = await getAllBadis();
 data = await filterBadiOverviewInformation(data);
-$("#spinner").toggle()
+$("#container").toggle()
+$("#spinnerLoading").toggle()
 
 let filterGratisBadi = false;
 let reverseList = false;

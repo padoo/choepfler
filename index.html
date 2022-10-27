@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/choepfeler_logo.svg" type="image/x-icon"/>
-
+  <meta name="viewport" content="width=device-width, initial-scale = 1.0"/>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <link rel="stylesheet" href="css/starter.css">
   <title>Chöpfler</title>
 </head>
 <body>
-<div class="container">
+<div id="container" class="container">
   <header class="pb-3 mb-5 border-bottom">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
@@ -25,7 +25,7 @@
 
 
   <h1>Chöpfler Web App!</h1>
-  <div class="col-lg-8 px-0">gih
+  <div class="col-lg-8 px-0">
     <p class="lead">Hier kommst du an alle Informationen über die verschiedensten Badeplätze in der Schweiz und
       auch an die Empfehlungen!</p>
   </div>
@@ -33,7 +33,6 @@
   <hr class="my-5 mx-0">
 
   <p id="text"></p>
-  <img id="spinner" width="100px" height="100px" class="spinner" src="assets/choepfeler_logo.svg"/>
 
   <p id="badiname"></p>
   <p id="location"></p>
@@ -61,7 +60,10 @@
   <div id="badiliste">
   </div>
 </div>
-
+<div id="spinnerLoading">
+  <img id="spinner" width="80px" height="auto" class="spinner" src="assets/choepfeler_logo.svg"/>
+  <p class="loading"></p>
+</div>
 <footer class=full_footer>
   <img class="island" src="assets/island2.png" alt="picture of island"/>
   <div class="choepfler-webapp">

@@ -5,7 +5,7 @@ import {
   update_list,
 } from "./search.util.js";
 import {getFavoriteBadis} from "./util.js";
-
+$("#container").toggle()
 function getPosition(options) {
   return new Promise((resolve, reject) =>
     navigator.geolocation.getCurrentPosition(resolve, reject, options)
@@ -67,7 +67,8 @@ const locationInfo = await getCurrentLocationInfo(city, kanton);
 const searchResultCity = await getSearchResult(locationInfo.city);
 let badiInfosCity = await badiOverviewInformation(searchResultCity);
 const badiInfosKanton = await badiOverviewInformationForKanton(locationInfo.kanton);
-$("#spinner").toggle()
+$("#container").toggle()
+$("#spinnerLoading").toggle()
 
 badiInfosCity.forEach(b1 => {
   const foundIndex = badiInfosKanton.findIndex(b2 => b1.id === b2.id);

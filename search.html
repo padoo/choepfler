@@ -8,7 +8,7 @@
   <title>Chöpfler</title>
 </head>
 <body>
-<div class="container">
+<div id="container" class="container">
   <header class="pb-3 mb-5 border-bottom">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 py-2">
@@ -90,7 +90,6 @@
     <h2>Resultate</h2>
     <p class="resultLengthBadis" id="resultLengthBadis"></p>
   </div>
-  <img id="spinner" width="100px" height="100px" class="spinner" src="assets/choepfeler_logo.svg"/>
 
   <p id="badiname"></p>
   <p id="location"></p>
@@ -100,7 +99,10 @@
   <div id="badiliste">
   </div>
 </div>
-
+<div id="spinnerLoading">
+  <img id="spinner" width="80px" height="auto" class="spinner" src="assets/choepfeler_logo.svg"/>
+  <p class="loading"></p>
+</div>
 <footer class=full_footer>
   <img class="island" src="assets/island2.png" alt="picture of island"/>
   <div class="choepfler-webapp">
